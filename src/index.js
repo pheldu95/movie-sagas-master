@@ -16,6 +16,8 @@ import axios from 'axios';
 function* rootSaga() {
     //run getMovies when GET_MOVIES dispatch is recieved
     yield takeEvery('GET_MOVIES', getMovies)
+    yield takeEvery('MOVIE_FOR_DETAILS', getMovieForDetails)
+
 }
 
 function* getMovies(){
@@ -32,6 +34,21 @@ function* getMovies(){
     })
     yield put({type:'SET_MOVIES', payload: movieArray}); 
 }
+
+function* getMovieForDetails(action){
+    let movieId = action.payload;
+    let movie = {};
+    yield axios({
+        method: 'GET',
+        url: `/details/${movieId}`
+    }).then((response)=>{
+        console.log('back from details router with movie:', response.data);
+        movie = response.data
+    }).catch((error)=>{
+        console.log(error);  
+    })
+    yield put({type:'SET_MOVIE_DETAILS', payload: movie})
+}
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -39,6 +56,16 @@ const sagaMiddleware = createSagaMiddleware();
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+const movieForDetailsPage = (state = {}, action) => {
+    switch(action.type){
+        case 'SET_MOVIE_DETAILS':
+            console.log(action.payload);
             return action.payload;
         default:
             return state;
@@ -60,6 +87,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        movieForDetailsPage
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

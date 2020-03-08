@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './MovieListItem.css';
-
+import {withRouter} from 'react-router-dom';
 
 
 class MovieListItem extends Component {
 
     goToDetails = (movie) =>{
-        this.props.history.push('/animals')
-        
+        try{
+            this.props.dispatch({type:'MOVIE_FOR_DETAILS', payload: movie.movie_id})
+        }
+        catch(err){
+            console.log(err);
+        }
+        finally{
+            this.props.history.push(`/details/${movie.movie_id}`);
+        }
     }
     render() {
         return (
@@ -24,4 +31,5 @@ const mapReduxStateToProps = (reduxState) => ({
     reduxState
 });
 
-export default connect(mapReduxStateToProps)(MovieListItem);
+//use withRouter so we can do this.props.history.push('details')
+export default withRouter(connect(mapReduxStateToProps)(MovieListItem));
