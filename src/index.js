@@ -15,9 +15,9 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     //run getMovies when GET_MOVIES dispatch is recieved
-    yield takeEvery('GET_MOVIES', getMovies)
-    yield takeEvery('MOVIE_FOR_DETAILS', getMovieForDetails)
-
+    yield takeEvery('GET_MOVIES', getMovies);
+    yield takeEvery('MOVIE_FOR_DETAILS', getMovieForDetails);
+    yield takeEvery('EDIT_MOVIE', editMovie);
 }
 
 function* getMovies(){
@@ -48,6 +48,20 @@ function* getMovieForDetails(action){
         console.log(error);  
     })
     yield put({type:'SET_MOVIE_DETAILS', payload: movie})
+}
+function* editMovie(action){
+    console.log('editing movie', action);
+    try{
+        yield axios({
+            method: 'PUT',
+            url: `/api/movies/${action.payload.movieId}`,
+            data: action.payload
+        })
+        yield put({type:'MOVIE_FOR_DETAILS', payload: action.payload.movieId})
+    }catch(error){
+        console.log(error);
+        
+    }   
 }
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();

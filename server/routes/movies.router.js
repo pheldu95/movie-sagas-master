@@ -18,5 +18,18 @@ router.get('/', (req, res) => {
 
 });
 
+//update title and description of movies
+router.put('/:movieId', (req, res)=>{
+  console.log(req.body);
+  let movie = req.body;
+  let queryString = `UPDATE "movies" SET "title" = ${movie.title}, "description"=${movie.description} WHERE "id" = ${req.params.movieId}`;
+  pool.query(queryString).then((results) => {
+    res.sendStatus(200);
+  }).catch((err) => {
+    res.sendStatus(500);
+    console.log(err);
+  })
+})
+
 
 module.exports = router;

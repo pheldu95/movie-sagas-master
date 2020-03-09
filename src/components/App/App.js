@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Details from '../Details/Details'
-import MovieList from '../MovieList/MovieList'
+import Details from '../Details/Details';
+import MovieList from '../MovieList/MovieList';
+import Edit from '../Edit/Edit';
 import { Button } from '@material-ui/core';
 import './App.css';
 import {HashRouter as Router, Route, Link} from 'react-router-dom';
@@ -15,6 +16,8 @@ class App extends Component {
           <Route exact path="/" component={MovieList}/>
         </div>
         <Route path='/details' component={Details} />
+        <Route path='/edit' component={Edit} />
+
       </Router>
     );
   }

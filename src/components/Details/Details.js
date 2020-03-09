@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MovieList from '../MovieList/MovieList';
-
+import {withRouter} from 'react-router-dom';
 
 
 
 class Details extends Component {
    
-    movie = () =>{
-        console.log(this.props.reduxState.movieForDetailsPage[0]);
-        
+    
+    backButton = () =>{
+        this.props.history.push('/');
+    }
+    editMovie = () =>{
+        this.props.history.push('/edit');     
     }
     render() {
         // let movie = this.props.reduxState.movieForDetailsPage[0];
@@ -22,10 +24,12 @@ class Details extends Component {
                     <>
                         <h1>{this.props.reduxState.movieForDetailsPage[0].title}</h1>
                         <img alt = 'movie details page' src = {this.props.reduxState.movieForDetailsPage[0].poster}></img> 
-                        <p>{this.props.reduxState.movieForDetailsPage[0].description}</p>   
+                        <p>{this.props.reduxState.movieForDetailsPage[0].description}</p>  
+                        <button onClick={(event)=>this.editMovie(this.props.reduxState.movieForDetailsPage)}>Edit</button> 
                     </>
+
                 }
-                <button onClick={this.movie}>sdadas</button>
+                <button onClick={this.backButton}>Back</button>
                 
             </div>
         );
@@ -36,4 +40,4 @@ const mapReduxStateToProps = (reduxState) => ({
     reduxState
 });
 
-export default connect(mapReduxStateToProps)(Details);
+export default withRouter(connect(mapReduxStateToProps)(Details));
