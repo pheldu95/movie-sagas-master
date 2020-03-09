@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 router.put('/:movieId', (req, res)=>{
   console.log(req.body);
   let movie = req.body;
-  let queryString = `UPDATE "movies" SET "title" = ${movie.title} WHERE "id" = ${req.params.movieId}`;
+  let queryString = `UPDATE "movies" SET "title" = '${movie.title}', "description" = '${movie.description}' WHERE "id" = ${req.params.movieId}`;
   // "description" = ${movie.description}
   pool.query(queryString).then((results) => {
     res.sendStatus(200);
