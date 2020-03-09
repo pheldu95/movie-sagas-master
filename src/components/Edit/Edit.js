@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import './Edit.css'
 
 
 
@@ -18,18 +18,22 @@ class Details extends Component {
         
     }
     cancelEdit = () =>{
+        //resets the state to what it was before anything was typed
         this.setState({
             title: this.props.reduxState.movieForDetailsPage[0].title,
             description: this.props.reduxState.movieForDetailsPage[0].description
         })
+        //goes back to details page
         this.props.history.push('/details');
     }
     submitEdit = () =>{
+        //send the dispatch and then return to the details page
         this.props.dispatch({type: 'EDIT_MOVIE', payload: this.state});
+        this.props.history.push(`/details/${this.state.movie_id}`);
     }
     render() {
         return (
-            <div>
+            <div className='editArea'>
                <h1>Edit Movie: {this.state.title}</h1>
                 <div>
                     <input onChange={(event) => this.handleChange(event, 'title')} value={this.state.title}/>

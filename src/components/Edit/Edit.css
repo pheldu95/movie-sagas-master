@@ -1,0 +1,11 @@
+.editArea {
+    width: 90%;
+    flex-wrap: wrap;
+    background-color: antiquewhite;
+    margin: auto;
+}
+
+
+h1 {
+    color: teal;
+}
