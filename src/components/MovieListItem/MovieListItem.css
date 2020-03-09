@@ -1,3 +1,8 @@
 .movie{
     margin: auto;
+    padding-top: 20px;
+}
+
+img{
+    border-radius: 10%;
 }

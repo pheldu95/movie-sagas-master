@@ -19,7 +19,7 @@ class MovieListItem extends Component {
     }
     render() {
         return (
-            <div className='movie'>
+            <div className="movie">
                 <img alt='movie poster' src={this.props.movie.poster} width='200px' onClick={(event) => this.goToDetails(this.props.movie)}/>
                 
             </div>

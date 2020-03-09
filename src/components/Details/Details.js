@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
-
+import './Details.css'
 
 
 class Details extends Component {
@@ -18,7 +18,7 @@ class Details extends Component {
         // console.log('dads', this.props.reduxState.movieForDetailsPage);
         
         return (
-            <div>
+            <div className="detailsDisplay">
                 {/* waits for movieForDetailsPage to exist before appending it */}
                 {this.props.reduxState.movieForDetailsPage[0]&&
                     <>

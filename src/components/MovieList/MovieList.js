@@ -18,8 +18,10 @@ class MovieList extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Movies</h1><br />
+            <div className = "moviesDisplay">
+                <div className="header">
+                    <h1>Movies</h1><br />
+                </div>
                 <div className = "moviesDisplay">
                     {this.props.reduxState.movies.map((movie) => {
                         return (
